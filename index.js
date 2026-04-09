@@ -1,13 +1,14 @@
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
+import { NextButton } from "./components/NavButton/NavButton.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]',
 );
 const searchBar = document.querySelector('[data-js="search-bar"]');
-const navigation = document.querySelector('[data-js="navigation"]');
-const prevButton = document.querySelector('[data-js="button-prev"]');
-const nextButton = document.querySelector('[data-js="button-next"]');
+// const navigation = document.querySelector('[data-js="navigation"]');
+// const prevButton = document.querySelector('[data-js="button-prev"]');
+// const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
 // States
@@ -57,8 +58,10 @@ console.log(maxPage);
 
 // Buttons
 
-nextButton.addEventListener("click", () => {
-  console.log(nextButton.style.display);
+// const prevButton = PrevButton();
+const nextButton = NextButton({ onclick: handleNextButtonClick });
+
+function handleNextButtonClick(event) {
   if (page === maxPage - 1) {
     nextButton.style.visibility = "hidden";
   }
@@ -67,20 +70,37 @@ nextButton.addEventListener("click", () => {
   }
   page++;
   fetchCharacters();
-});
+}
 
-prevButton.addEventListener("click", () => {
-  console.log(prevButton.style.display);
+const navigation = document.createElement("nav");
+navigation.classList.add("navigation");
+navigation.append(nextButton);
+cardContainer.append(navigation);
 
-  if (page === 2) {
-    prevButton.style.visibility = "hidden";
-  }
-  if (page === maxPage) {
-    nextButton.style.visibility = "visible";
-  }
-  page--;
-  fetchCharacters();
-});
+// nextButton.addEventListener("click", () => {
+//   console.log(nextButton.style.display);
+//   // if (page === maxPage - 1) {
+//   //   nextButton.style.visibility = "hidden";
+//   // }
+//   // if (page === 1) {
+//   //   prevButton.style.visibility = "visible";
+//   // }
+//   // page++;
+//   // fetchCharacters();
+// });
+
+// prevButton.addEventListener("click", () => {
+//   console.log(prevButton.style.display);
+
+//   if (page === 2) {
+//     prevButton.style.visibility = "hidden";
+//   }
+//   if (page === maxPage) {
+//     nextButton.style.visibility = "visible";
+//   }
+//   page--;
+//   fetchCharacters();
+// });
 
 async function handleFetchCharacters() {
   const result = await fetchCharacters();
