@@ -11,42 +11,50 @@ const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
 // States
-const maxPage = 1;
-const page = 1;
+// let maxPage = 1;
+let page = 1;
 const searchQuery = "";
 
 // Fetch API
 
 async function fetchCharacters() {
-  try {
-    const response = await fetch("https://rickandmortyapi.com/api/character");
-    if (!response.ok) {
-      throw new Error(`Failed to fetch Data! Status Code: ${response.status}`);
+  let maxPages = false;
+  while (!maxPages) {
+    try {
+      const response = await fetch(
+        `https://rickandmortyapi.com/api/character?page=${page}`,
+      );
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch Data! Status Code: ${response.status}`,
+        );
+      }
+      const data = await response.json();
+      console.log(data.info.pages, page);
+      if (data.info.pages === page) {
+        maxPages = true;
+      }
+      // return data;
+      page++;
+      data.results.forEach((character) => {
+        cardContainer.append(createCharacterCard(character));
+      });
+    } catch (error) {
+      return { error: error };
     }
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    return { error: error };
   }
 }
+fetchCharacters();
 
-async function handleFetchCharacters() {
-  const result = await fetchCharacters();
-  if (result.error) {
-    console.log("An error occurred:", result.error);
-  }
-  return result;
-  // } else {
-  //   // console.log("Fetched data:", result.results);
-  // }
-}
-const characters = await handleFetchCharacters();
-
-console.log(characters);
+// async function handleFetchCharacters() {
+//   const result = await fetchCharacters();
+//   if (result.error) {
+//     console.log("An error occurred:", result.error);
+//   }
+//   return result;
+//   // } else {
+//   //   // console.log("Fetched data:", result.results);
+//   // }
+// }
 
 // createCharacterCard();
-
-characters.results.forEach((character) => {
-  cardContainer.append(createCharacterCard(character));
-});
