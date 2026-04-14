@@ -1,5 +1,11 @@
 .search-bar-container {
   width: 300px;
+  margin: 0 auto;
+  padding: var(--searchBar-padding);
+  position: fixed;
+  align-self: center;
+  top: calc(var(--title-height));
+  z-index: 1;
 }
 
 .search-bar {

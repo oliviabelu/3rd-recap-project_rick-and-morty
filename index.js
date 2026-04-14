@@ -152,3 +152,8 @@ async function handleFetchCharacters() {
 }
 
 // createCharacterCard();
+
+// //header calculations
+// const title = document.querySelector('[data-js="title"]');
+
+// console.log(title.style.fontSize);

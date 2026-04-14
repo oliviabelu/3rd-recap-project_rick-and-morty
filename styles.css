@@ -2,6 +2,7 @@
 @import "components/SearchBar/SearchBar.css";
 @import "components/NavButton/NavButton.css";
 @import "components/NavPagination/NavPagination.css";
+@import "components/Header/Header.css";
 
 * {
   box-sizing: border-box;
@@ -9,25 +10,49 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: "Schwifty";
+  src: url(./fonts/get_schwifty.ttf);
+}
+
 :root {
   --color-primary: rgb(51, 51, 51);
   --color-secondary: #f6f6f6;
+  --color-background: #fff874;
   --font-family: system-ui;
+
+  --title-padding: 1.5rem;
+  --title-size: 3rem;
+  --title-line-height: 1.5;
+
+  --title-height: calc(
+    var(--title-line-height) * var(--title-size) + 2 * var(--title-padding)
+  );
+
+  --searchBar-padding: 0.5em;
+
+  --searchBar-height: 2em;
+
+  --header-height: calc(var(--title-height) + 2 * var(--searchBar-height));
 }
 
 body {
   font-family: var(--font-family);
   color: var(--color-primary);
-  padding: 20px;
-  background-color: #fff874;
+
+  background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
 }
 
 main {
+  position: relative;
+  top: var(--header-height);
+  /* min-height: calc(100vh - var(--header-height)); */
+  /* padding: 20px; */
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-.title {
-  padding: 10px 0;
 }

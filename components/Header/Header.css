@@ -1,0 +1,49 @@
+header {
+  position: fixed;
+  overflow: hidden;
+  z-index: 2;
+  width: 100%;
+  padding: 2rem;
+  height: var(--title-height);
+
+  /* outline: 1px solid black; */
+}
+
+.title {
+  padding: var(--title-padding);
+  text-align: center;
+  font-family: "Schwifty";
+  font-size: var(--title-size);
+  line-height: var(--title-line-height);
+  /* position: fixed; */
+  /*width: 100%;
+  padding: var(--title-padding);
+  text-align: center;
+  font-family: "Schwifty";
+  font-size: var(--title-size);
+  line-height: var(--title-line-height);
+  z-index: 1; */
+
+  /* height: 30%; */
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    var(--color-background) 0%,
+    transparent 50%
+  );
+  backdrop-filter: blur(16px);
+  mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);
+  /*---damit die Fläche unter dem Blur klickbar ist */
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(16px);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0% 50%,
+    transparent 50% 100%
+  );
+}
